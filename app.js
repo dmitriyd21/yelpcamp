@@ -3,7 +3,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 
-const dbUrl = 'mongodb://127.0.0.1:27017/yelp-camp';
+const dbUrl = process.env.DB_URL;
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
@@ -103,7 +103,7 @@ store.on('error', function(e) {
 const sessionConfig = {
     name: 'session',
     secret: 'thisshouldbeabettersecret!',
-    store: store,
+    store: MongoStore.create(options),
     resave: false,
     saveUninitialized: true,
     cookie: {
